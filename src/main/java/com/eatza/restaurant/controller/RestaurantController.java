@@ -16,8 +16,8 @@ import com.eatza.restaurant.model.MenuItem;
 import com.eatza.restaurant.model.Restaurant;
 import com.eatza.restaurant.service.RestaurantService;
 
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.Authorization;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
@@ -28,7 +28,8 @@ public class RestaurantController {
 	RestaurantService restaurantService;	
 	
 	@GetMapping("/restaurant/items/{restaurantId}")
-	@ApiOperation(tags = "RestaurantController", value = "Get items by restaurant id", authorizations = {@Authorization(value = "Bearer")})
+	@SecurityRequirement(name = "BearerAuth")
+	@Operation(tags = "RestaurantController", description = "Get items by restaurant id")
 	public ResponseEntity<List<MenuItem>> getItemsByRestaurantId(@PathVariable Long restaurantId,
 			@RequestParam Integer pageNumber, @RequestParam Integer pageSize) throws RestaurantException {
 		log.debug("In getItemsByRestaurantId method");
@@ -36,21 +37,24 @@ public class RestaurantController {
 	}
 	
 	@GetMapping("/restaurants")
-	@ApiOperation(tags = "RestaurantController", value = "Get all restaurant", authorizations = {@Authorization(value = "Bearer")})
+	@SecurityRequirement(name = "BearerAuth")
+	@Operation(tags = "RestaurantController", description = "Get all restaurant")
 	public ResponseEntity<List<Restaurant>> getAllRestaurants(@RequestParam Integer pageNumber, @RequestParam Integer pageSize) throws RestaurantException {
 		log.debug("In getAllRestaurants method");
 		return ResponseEntity.status(HttpStatus.OK).body(restaurantService.getAllRestaurants(pageNumber, pageSize));
 	}
 	
 	@GetMapping("/restaurants/{restaurantId}")
-	@ApiOperation(tags = "RestaurantController", value = "Get restaurant by id", authorizations = {@Authorization(value = "Bearer")})
+	@SecurityRequirement(name = "BearerAuth")
+	@Operation(tags = "RestaurantController", description = "Get restaurant by id")
 	public ResponseEntity<Restaurant> getRestaurantById(@PathVariable Long restaurantId) throws RestaurantException {
 		log.debug("In getAllRestaurants method");
 		return ResponseEntity.status(HttpStatus.OK).body(restaurantService.getRestaurantById(restaurantId));
 	}
 	
 	@GetMapping("/restaurants/budget/{totalBudget}")
-	@ApiOperation(tags = "RestaurantController", value = "Get restaurants by budget", authorizations = {@Authorization(value = "Bearer")})
+	@SecurityRequirement(name = "BearerAuth")
+	@Operation(tags = "RestaurantController", description = "Get restaurants by budget")
 	public ResponseEntity<List<Restaurant>> getRestaurantsByBudget(@PathVariable Integer totalBudget,
 			@RequestParam Integer pageNumber, @RequestParam Integer pageSize) throws RestaurantException {
 		log.debug("In getRestaurantsByBudget method");
@@ -58,7 +62,8 @@ public class RestaurantController {
 	}
 	
 	@GetMapping("/restaurants/name/{restaurantName}")
-	@ApiOperation(tags = "RestaurantController", value = "Get restaurants by name", authorizations = {@Authorization(value = "Bearer")})
+	@SecurityRequirement(name = "BearerAuth")
+	@Operation(tags = "RestaurantController", description = "Get restaurants by name")
 	public ResponseEntity<List<Restaurant>> getRestaurantsByName(@PathVariable String restaurantName,
 			@RequestParam Integer pageNumber, @RequestParam Integer pageSize) throws RestaurantException {
 		log.debug("In getRestaurantsByName method");
@@ -66,8 +71,9 @@ public class RestaurantController {
 		
 	}
 	
-	@ApiOperation(tags = "RestaurantController", value = "Get restaurant by rating", authorizations = {@Authorization(value = "Bearer")})
 	@GetMapping("/restaurants/rating/{rating}")
+	@SecurityRequirement(name = "BearerAuth")
+	@Operation(tags = "RestaurantController", description = "Get restaurant by rating")
 	public ResponseEntity<List<Restaurant>> getRestaurantsByRating(@PathVariable Double rating,
 			@RequestParam Integer pageNumber, @RequestParam Integer pageSize) throws RestaurantException {
 		log.debug("In getRestaurantsByRating method");
@@ -76,7 +82,8 @@ public class RestaurantController {
 	}
 	
 	@GetMapping("/restaurants/location/{location}/cuisine/{cuisine}")
-	@ApiOperation(tags = "RestaurantController", value = "Get restaurant by location and cuisine", authorizations = {@Authorization(value = "Bearer")})
+	@SecurityRequirement(name = "BearerAuth")
+	@Operation(tags = "RestaurantController", description = "Get restaurant by location and cuisine")
 	public ResponseEntity<List<Restaurant>> getRestaurantsByLocationAndCuisine(@PathVariable String location, @PathVariable String cuisine,
 			@RequestParam Integer pageNumber, @RequestParam Integer pageSize) throws RestaurantException {
 		log.debug("In getRestaurantsByLocationCuisine method");
@@ -84,7 +91,8 @@ public class RestaurantController {
 	}
 	
 	@GetMapping("/restaurants/name/{restaurantName}/location/{location}")
-	@ApiOperation(tags = "RestaurantController", value = "Get restaurant by location and name", authorizations = {@Authorization(value = "Bearer")})
+	@SecurityRequirement(name = "BearerAuth")
+	@Operation(tags = "RestaurantController", description = "Get restaurant by location and name")
 	public ResponseEntity<List<Restaurant>> getRestaurantsByLocationAndName(@PathVariable String restaurantName, @PathVariable String location,
 			@RequestParam Integer pageNumber, @RequestParam Integer pageSize) throws RestaurantException {
 		log.debug("In getRestaurantsByLocationName method");
@@ -92,14 +100,16 @@ public class RestaurantController {
 	}
 	
 	@PutMapping("/restaurant/{restaurantId}/review")
-	@ApiOperation(tags = "RestaurantController", value = "Update rating for restaurant", authorizations = {@Authorization(value = "Bearer")})
+	@SecurityRequirement(name = "BearerAuth")
+	@Operation(tags = "RestaurantController", description = "Update rating for restaurant")
 	public ResponseEntity<Integer> updateRestaurantRating(@PathVariable Long restaurantId, @RequestParam Double rating) throws RestaurantException {
 		log.debug("In updateRestaurantRating method");
 		return ResponseEntity.status(HttpStatus.OK).body(restaurantService.updateRestaurantRating(restaurantId, rating));
 	}
 	
 	@GetMapping("/item/{itemId}")
-	@ApiOperation(tags = "RestaurantController", value = "Get item by item id", authorizations = {@Authorization(value = "Bearer")})
+	@SecurityRequirement(name = "BearerAuth")
+	@Operation(tags = "RestaurantController", description = "Get item by item id")
 	public ResponseEntity<MenuItem> getItemByItemId(@PathVariable Long itemId) throws RestaurantException {
 		log.debug("In getItemByItemId method");
 		return ResponseEntity.status(HttpStatus.OK).body(restaurantService.getItemByItemId(itemId));		
