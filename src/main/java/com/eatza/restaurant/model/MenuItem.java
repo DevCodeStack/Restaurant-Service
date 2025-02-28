@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "menu_items")
+@Table(name = "menu_items", schema = "eatza")
 @Getter @Setter @NoArgsConstructor
 public class MenuItem {
 	

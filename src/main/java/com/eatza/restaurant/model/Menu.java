@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -16,6 +17,7 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
+@Table(name = "menu", schema = "eatza")
 public class Menu {
 
 	@Id
