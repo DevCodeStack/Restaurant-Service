@@ -9,9 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import com.eatza.restaurant.model.Restaurant;
 
 public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
-		
-	@Query(nativeQuery = true, value = "select * from eatza.restaurants where budget = ?1")
-	public List<Restaurant> findByBudget(Integer budget);
 	
 	@Query(nativeQuery = true, value = "select * from eatza.restaurants where name = ?1")
 	public List<Restaurant> findByName(String name);
@@ -19,7 +16,12 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
 	@Query(nativeQuery = true, value = "select * from eatza.restaurants where rating = ?1")
 	public List<Restaurant> findByRating(Double rating);
 	
-	@Query(nativeQuery = true, value = "select * from eatza.restaurants where location = ?1 and cuisine = ?2")
+	@Query(nativeQuery = true, value = """
+			select r.* from restaurant r
+			join menu m on m.restaurant_id = r.id
+			join cuisine c on c.id = m.cuisine_id
+			where r.location = ?1 and c.name = ?2
+			""")
 	public List<Restaurant> findByLocationAndCuisine(String location, String cuisine);
 	
 	@Query(nativeQuery = true, value = "select * from eatza.restaurants where name = ?1 and location = ?2")

@@ -11,35 +11,45 @@ import jakarta.persistence.Table;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Data @Builder @AllArgsConstructor
+@Getter @Setter @NoArgsConstructor
 @Entity
 @Table(name = "menu_items", schema = "eatza")
-@Getter @Setter @NoArgsConstructor
 public class MenuItem {
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private String description;
+	private String diet;
+//	private Long prepTime;
+//	private Long cookTime;
+	private Long timeToServe;
+	private int servings;
 	private int price;
 	
 	@ManyToOne
-	@JoinColumn(name = "menu_id", nullable = false)
+	@JoinColumn(name = "course_id", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	Menu menu;
-	
-	
-	public MenuItem(String name, String description, int price, Menu menu) {
+	private Course course;
+
+	public MenuItem(String name, String diet, Long timeToServe, int servings, int price, Course course) {
+		super();
 		this.name = name;
-		this.description = description;
+		this.diet = diet;
+//		this.prepTime = prepTime;
+//		this.cookTime = cookTime;
+		this.timeToServe = timeToServe;
+		this.servings = servings;
 		this.price = price;
-		this.menu= menu;
+		this.course = course;
 	}
-
-
-
+	
 }

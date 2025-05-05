@@ -21,8 +21,8 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import com.eatza.restaurant.dto.Order;
 
-@EnableKafka
-@Configuration
+//@EnableKafka
+//@Configuration
 public class KafkaConfig {
 	
 	@Bean

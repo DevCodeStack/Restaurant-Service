@@ -1,6 +1,7 @@
 package com.eatza.restaurant.model;
 
-import jakarta.persistence.Column;
+import java.time.LocalTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,19 +17,19 @@ import lombok.Setter;
 @Data @Builder @AllArgsConstructor
 @Getter @Setter @NoArgsConstructor
 @Entity
-@Table(name = "menu", schema = "eatza")
-public class Menu {
-
+@Table(name = "active_hours", schema = "eatza")
+public class ActiveHours {
+	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "restaurant_id")
-	private Long restaurantId;
-	@Column(name = "cuisine_id")
-	private Long cuisineId;
 	
-	public Menu(Long restaurantId, Long cuisineId) {
-		this.restaurantId = restaurantId;
-		this.cuisineId = cuisineId;
+	private LocalTime activeFrom;
+	private LocalTime activeTill;
+	
+	public ActiveHours(LocalTime activeFrom, LocalTime activeTill) {
+		this.activeFrom = activeFrom;
+		this.activeTill = activeTill;
 	}
+
 }

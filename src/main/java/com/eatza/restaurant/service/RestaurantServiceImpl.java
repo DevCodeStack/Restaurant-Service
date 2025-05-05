@@ -44,6 +44,17 @@ public class RestaurantServiceImpl implements RestaurantService {
 			throw new RestaurantException(ex.getMessage());
 		}
 	}
+	
+//	@Override
+	public List<Restaurant> addRestaurant() throws RestaurantException {
+		try {
+			
+			return restaurantRepository.findAll();
+			
+		} catch(Exception ex) {
+			throw new RestaurantException(ex.getMessage());
+		}
+	}
 
 	@Override
 	public Restaurant getRestaurantById(Long restaurantId) throws RestaurantException {
@@ -51,17 +62,6 @@ public class RestaurantServiceImpl implements RestaurantService {
 			
 			Optional<Restaurant> restaurant= restaurantRepository.findById(restaurantId);
 			return restaurant.isPresent()?restaurant.get():null;
-			
-		} catch(Exception ex) {
-			throw new RestaurantException(ex.getMessage());
-		}
-	}
-	
-	@Override
-	public List<Restaurant> getRestaurantsByBudget(Integer totalBudget, Integer pageNumber, Integer pageSize) throws RestaurantException {
-		try {
-			
-			return restaurantRepository.findByBudget(totalBudget);
 			
 		} catch(Exception ex) {
 			throw new RestaurantException(ex.getMessage());

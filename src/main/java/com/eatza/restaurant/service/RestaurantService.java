@@ -11,9 +11,7 @@ public interface RestaurantService {
 	List<MenuItem> getItemsByRestaurantId(Long restaurantId, Integer pageNumber, Integer pageSize) throws RestaurantException;
 
 	List<Restaurant> getAllRestaurants(Integer pageNumber, Integer pageSize) throws RestaurantException;
-
-	List<Restaurant> getRestaurantsByBudget(Integer totalBudget, Integer pageNumber, Integer pageSize) throws RestaurantException;
-
+	
 	List<Restaurant> getRestaurantsByName(String restaurantName, Integer pageNumber, Integer pageSize) throws RestaurantException;
 
 	List<Restaurant> getRestaurantsByRating(Double rating, Integer pageNumber, Integer pageSize) throws RestaurantException;

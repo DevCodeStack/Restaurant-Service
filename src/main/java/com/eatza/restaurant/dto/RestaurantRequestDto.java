@@ -10,7 +10,6 @@ public class RestaurantRequestDto {
 	private String name;
 	private String location;
 	private String cuisine;
-	private int budget;
 	private double rating;
 
 }

@@ -11,7 +11,7 @@ import com.eatza.restaurant.util.OrderGlobalScope;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Service
+//@Service
 @Slf4j
 public class KafkaService {
 	

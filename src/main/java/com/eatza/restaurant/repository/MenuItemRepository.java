@@ -9,7 +9,13 @@ import com.eatza.restaurant.model.MenuItem;
 
 public interface MenuItemRepository extends JpaRepository<MenuItem, Long>{
 	
-	@Query(nativeQuery = true, value = "select * from eatza.menu_items where menu_Id in (select id from eatza.menu where restaurant_Id = ?1)")
+	@Query(nativeQuery = true, value = """
+			select mi.* from eatza.menu_items mi
+			where mi.course_id in (
+			select c.id from eatza.course c
+			join eatza.menu m on m.cuisine_id = c.cuisine_id
+			where m.restaurant_id = ?1)
+			""")
 	public List<MenuItem> findByRestaurantId(Long restaurantId);
 	
 }
